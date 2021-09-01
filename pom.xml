@@ -12,6 +12,14 @@
         <main.class>io.omnicate.oddest</main.class>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github Omnicate Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/working-group-two/oddest-number</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
