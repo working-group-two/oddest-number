@@ -34,6 +34,7 @@
     <properties>
         <kotlin.version>1.2.51</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+        <dokka.version>1.5.0</dokka.version>
         <main.class>io.omnicate.oddest</main.class>
     </properties>
 
@@ -166,9 +167,33 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kdoc-maven-plugin</artifactId>
-          <version>0.12.1230</version>
+          <groupId>org.jetbrains.dokka</groupId>
+          <artifactId>dokka-maven-plugin</artifactId>
+          <version>${dokka.version}</version>
+          <executions>
+            <execution>
+              <id>attach-kotlin-javadocs</id>
+              <phase>deploy</phase>
+              <goals>
+                <goal>dokka</goal>
+              </goals>
+            </execution>
+            <execution>
+              <phase>install</phase>
+              <goals>
+                <goal>dokka</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <dokkaPlugins>
+              <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>kotlin-as-java-plugin</artifactId>
+                <version>${dokka.version}</version>
+              </plugin>
+            </dokkaPlugins>
+          </configuration>
         </plugin>
       </plugins>
     </build>
