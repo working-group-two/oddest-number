@@ -6,7 +6,7 @@ package io.omnicate.oddest
 class Oddest {
    companion object {
        /**
-        * Returns true if num is odd, false if otherwise.
+        * @return true if num is odd, false if otherwise.
         */
        fun isOdd(num: Int): Boolean {
            return num.rem(2) == 1

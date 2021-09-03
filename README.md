@@ -3,6 +3,11 @@ Ineffective odd/even number determinator. Testing gh packages.
 
 ## deploying to maven central
 
+```
+1. mvn clean
+2. jar cvf oddest-number-VERSION-javadoc.jar dummy-javadoc.md
+3. mvn deploy
+```
 `mvn clean deploy -P release`
 
 Note that this requires your maven settings.xml to be configured as described
