@@ -20,14 +20,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - id: install-secret-key
+        name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
       - name: checkout
         uses: actions/checkout@v2
-
-      - name: deploy-using-action
-        uses: simontunnat/action-maven-deploy@v1.1
-        with:
-          username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
-          repository: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
-          maven-goals: deploy
+      - name: deploy to maven central
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
+        run: |
+          mvn \
+            --no-transfer-progress \
+            --batch-mode \
+            -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }} \
+            clean deploy
 
