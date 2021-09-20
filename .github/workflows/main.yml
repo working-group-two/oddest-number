@@ -23,7 +23,7 @@ jobs:
       - name: deploy-using-action
         uses: simontunnat/action-maven-deploy@v1.1
         with:
-          username: ${{ SECRETS.SONATYPE_ACCOUNT }}
-          password: ${{ SECRETS.SONATYPE_PASSWORD }}
+          username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          password: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           repository: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
 
