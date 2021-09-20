@@ -26,4 +26,5 @@ jobs:
           username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
           repository: https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/
+          maven-goals: deploy
 
