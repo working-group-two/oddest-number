@@ -36,9 +36,9 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Build
-        run: mvn --batch-mode package --file pom.xml install -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: mvn -X --batch-mode package --file pom.xml install -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
       - name: deploy package
-        run: mvn --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: mvn -X --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
