@@ -33,8 +33,8 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           server-id: 'ossrh'
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
+          server-username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: Build
         run: ./mvnw -X --batch-mode package --file pom.xml compile -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         env:
