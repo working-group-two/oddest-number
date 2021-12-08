@@ -6,7 +6,7 @@ name: CI-deploy
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ mvn-github-actions-round-2 ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,12 +36,12 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
       - name: Build
-        run: mvn -X --batch-mode package --file pom.xml install -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: ./mvnw -X --batch-mode package --file pom.xml compile -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: deploy package
-        run: mvn -X --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: ./mvnw -X --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
