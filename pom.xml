@@ -36,6 +36,7 @@
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <dokka.version>1.5.0</dokka.version>
         <main.class>io.omnicate.oddest</main.class>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
     </properties>
 
     <distributionManagement>
@@ -70,6 +71,14 @@
         ${project.basedir}/src/main/kotlin
       </sourceDirectory>
       <plugins>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
+          <configuration>
+            <scmCommentPrefix>[skip ci]</scmCommentPrefix>
+            <tagNameFormat>@v{project.version}</tagNameFormat>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
