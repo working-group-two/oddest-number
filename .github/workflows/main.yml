@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-deploy
+name: mvn-compile
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ mvn-github-actions-round-2 ]
+    branches: [ simpler-actions-example ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,11 +20,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - id: install-secret-key
-        name: Install gpg secret key
-        run: |
-          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
       - name: checkout
         uses: actions/checkout@v2
       - name: set up maven central repository
@@ -32,16 +27,5 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          server-id: 'ossrh'
-          server-username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          server-password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: Build
-        run: ./mvnw -X --batch-mode package --file pom.xml compile -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
-      - name: deploy package
-        run: ./mvnw -X --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
+        run: ./mvnw -X --batch-mode compile
