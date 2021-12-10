@@ -166,6 +166,7 @@
               <arg>--pinentry-mode</arg>
               <arg>loopback</arg>
             </gpgArguments>
+            <homedir>/home/runner/.gnupg</homedir>
           </configuration>
         </plugin>
         <plugin>
