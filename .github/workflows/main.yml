@@ -23,6 +23,8 @@ jobs:
       - id: install-secret-key
         name: Install gpg secret key
         run: |
+          mkdir -p /github/home
+          touch /github/home/pubring.kbx
           cat <(echo -e "${{ secrets.MAVEN_RELEASE_KEY }}") | gpg --batch --import --homedir /github/home/
           gpg --list-secret-keys --keyid-format LONG
       - name: checkout
