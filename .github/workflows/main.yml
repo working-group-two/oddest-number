@@ -28,6 +28,9 @@ jobs:
           maven-args: "clean install"
           ssh-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
           ssh-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+          gpg-enabled: "true"
+          gpg-key-id: "5614387E34B47A75"
+          gpg-key: ${{ secrets.MAVEN_RELEASE_KEY }}
       - name: Release
         uses: qcastel/github-actions-maven-cmd@master
         with:
