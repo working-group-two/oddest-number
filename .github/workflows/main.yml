@@ -39,7 +39,7 @@ jobs:
           maven-release-version-number: \${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}
           git-release-bot-name: "team products"
           git-release-bot-email: "products@wgtwo.com"
-          maven-args: "-Dmaven.javadoc.skip=false -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+          maven-args: "release -Dmaven.javadoc.skip=false -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
           gpg-enabled: "true"
           gpg-key-id: "5614387E34B47A75"
           gpg-key: ${{ secrets.MAVEN_RELEASE_KEY }}
