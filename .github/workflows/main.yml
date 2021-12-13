@@ -31,6 +31,7 @@ jobs:
           gpg-enabled: "true"
           gpg-key-id: "5614387E34B47A75"
           gpg-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          gpg-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
       - name: Release
         uses: qcastel/github-actions-maven-cmd@master
         with:
