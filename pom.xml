@@ -88,7 +88,7 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>${maven-release-plugin.version}</version>
           <configuration>
-            <scmCommentPrefix>[skip ci]</scmCommentPrefix>
+            <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
             <tagNameFormat>@v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</tagNameFormat>
           </configuration>
         </plugin>
@@ -179,7 +179,6 @@
               <arg>--pinentry-mode</arg>
               <arg>loopback</arg>
             </gpgArguments>
-            <skip>true</skip>
           </configuration>
         </plugin>
         <plugin>
