@@ -26,9 +26,9 @@
     </developers>
 
     <scm>
-      <connection>scm:git:git://github.com/working-group-two/oddest-number.git</connection>
-      <developerConnection>scm:git:ssh://github.com:working-group-two/oddest-number.git</developerConnection>
-      <url>http://github.com/working-group-two/oddest-number/tree/master</url>
+      <connection>scm:git:git@github.com/working-group-two/oddest-number.git</connection>
+      <developerConnection>scm:git:git@github.com:working-group-two/oddest-number.git</developerConnection>
+      <url>http://github.com/working-group-two/oddest-number.git</url>
     </scm>
 
     <properties>
