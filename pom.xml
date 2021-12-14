@@ -90,6 +90,7 @@
           <configuration>
             <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
             <tagNameFormat>@v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}</tagNameFormat>
+            <pushChanges>false</pushChanges>
           </configuration>
         </plugin>
         <plugin>
