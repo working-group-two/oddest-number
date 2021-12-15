@@ -23,7 +23,7 @@ jobs:
       - id: install-secret-key
         name: Install gpg secret key
         run: |
-          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
+          cat <(echo -e "${{ secrets.MAVEN_RELEASE_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
       - name: checkout
         uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
           server-password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: build (no tests)
         id: mvn-package
-        run: mvn -X --batch-mode package --file pom.xml -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: mvn -X --batch-mode package --file pom.xml -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
       - name: release-prepare
         run: mvn build-helper:parse-version release:prepare -B
       - name: release-perform
