@@ -38,7 +38,16 @@ jobs:
       - name: build (no tests)
         id: mvn-package
         run: mvn -X --batch-mode package --file pom.xml -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: release-prepare
         run: mvn build-helper:parse-version release:prepare -B
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: release-perform
         run: mvn release:perform
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
