@@ -33,8 +33,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           server-id: 'ossrh'
+          cache: 'maven'
           server-username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           server-password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
+          gpg-passprahse: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+          gpg-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
       - name: build (no tests)
         id: mvn-package
         run: mvn -X --batch-mode package --file pom.xml -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
