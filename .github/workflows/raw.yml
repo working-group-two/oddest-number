@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-deploy
+name: CI-deploy-test-raw
 
 # Controls when the workflow will run
 on:
