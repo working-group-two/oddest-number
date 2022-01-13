@@ -26,11 +26,11 @@ jobs:
         uses: qcastel/github-actions-maven-cmd@master
         with:
           maven-args: "clean install"
-          ssh-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          ssh-private-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
           ssh-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
           gpg-enabled: "true"
           gpg-key-id: "5614387E34B47A75"
-          gpg-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          gpg-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
           gpg-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
       - name: Release
         uses: qcastel/github-actions-maven-cmd@master
@@ -42,7 +42,7 @@ jobs:
           maven-args: "release:perform -Dmaven.javadoc.skip=false -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
           gpg-enabled: "true"
           gpg-key-id: "5614387E34B47A75"
-          gpg-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          gpg-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
           gpg-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
