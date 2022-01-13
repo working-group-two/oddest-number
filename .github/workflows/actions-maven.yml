@@ -23,7 +23,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: build & test
-        uses: qcastel/github-actions-maven-cmd@master
+        uses: otron/github-actions-maven-cmd@maven-gpg-testing
         with:
           maven-args: "clean install"
           ssh-private-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
@@ -33,7 +33,7 @@ jobs:
           gpg-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
           gpg-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
       - name: Release
-        uses: qcastel/github-actions-maven-cmd@master
+        uses: otron/github-actions-maven-cmd@maven-gpg-testing
         with:
           maven-development-version-number: \${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT
           maven-release-version-number: \${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}
