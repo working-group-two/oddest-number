@@ -25,7 +25,8 @@ jobs:
       - name: build & test
         uses: otron/github-actions-maven/actions/release@maven-gpg-testing
         with:
-          maven-args: "clean install"
+          release-branch-name: "simpler-actions-example"
+          maven-args: "clean package"
           ssh-private-key: ${{ secrets.MAVEN_RELEASEA_KEY_B64 }}
           ssh-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
           gpg-enabled: "true"
