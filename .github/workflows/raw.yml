@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-deploy
+name: CI-deploy-test-raw
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ simpler-actions-example ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
       - id: install-secret-key
         name: Install gpg secret key
         run: |
-          cat <(echo -e "${{ secrets.GPG_SECRET_KEY }}") | gpg --batch --import
+          cat <(echo -e "${{ secrets.MAVEN_RELEASE_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
       - name: checkout
         uses: actions/checkout@v2
@@ -33,15 +33,24 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           server-id: 'ossrh'
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-      - name: Build
-        run: mvn -X --batch-mode package --file pom.xml install -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+          cache: 'maven'
+          server-username: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_NEXUS_SECRET }}
+          gpg-passprahse: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+          gpg-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+      - name: build (no tests)
+        id: mvn-package
+        run: mvn -X --batch-mode package --file pom.xml -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
-      - name: deploy package
-        run: mvn -X --batch-mode deploy -Dgpg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+      - name: release-prepare
+        run: mvn build-helper:parse-version release:prepare -B
+        env:
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
+      - name: release-perform
+        run: mvn release:perform
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
