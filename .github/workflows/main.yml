@@ -25,6 +25,11 @@ jobs:
         run: |
           cat <(echo -e "${{ secrets.MAVEN_RELEASE_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.4
+        with:
+          maven-version: 3.8.2
+
       - name: checkout
         uses: actions/checkout@v2
       - name: set up maven central repository
