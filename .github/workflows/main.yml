@@ -36,7 +36,7 @@ jobs:
           server-username: ${{ secrets.SONATYPE_ACCOUNT }}
           server-password: ${{ secrets.SONATYPE_PASSWORD }}
       - name: Build
-        run: mvn -X --batch-mode package --file pom.xml install -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+        run: mvn -B package -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
