@@ -40,7 +40,7 @@ jobs:
           server-username: ${{ secrets.SONATYPE_ACCOUNT }}
           server-password: ${{ secrets.SONATYPE_PASSWORD }}
       - name: Build
-        run: mvn -B package -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+        run: mvn -B package
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
