@@ -17,5 +17,8 @@ jobs:
       - name: build and test
         uses: qcastel/github-actions-maven-release@master
         with:
-          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+          maven-args: "-DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
           ssh-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          git-release-bot-name: "maven-minion"
+          git-release-bot-email: "products@wgtwo.com"
+          release-branch-name: "test/gh-actions-maven-release"
