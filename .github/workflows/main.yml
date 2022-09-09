@@ -39,13 +39,15 @@ jobs:
           server-id: 'ossrh'
           server-username: ${{ secrets.SONATYPE_ACCOUNT }}
           server-password: ${{ secrets.SONATYPE_PASSWORD }}
+          gpg-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
+          gpg-passphrase: ${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
       - name: Build
         run: mvn -B package
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
       - name: deploy package
-        run: mvn -B deploy -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }}
+        run: mvn -B deploy
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
