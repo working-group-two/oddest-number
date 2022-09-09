@@ -21,4 +21,3 @@ jobs:
           ssh-private-key: ${{ secrets.MAVEN_RELEASE_KEY }}
           git-release-bot-name: "maven-minion"
           git-release-bot-email: "products@wgtwo.com"
-          release-branch-name: "test/gh-actions-maven-release"
