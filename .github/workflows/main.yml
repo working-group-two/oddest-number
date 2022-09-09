@@ -46,8 +46,8 @@ jobs:
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
-      - name: deploy package
-        run: mvn -B deploy
+      - name: mvn deploy
+        run: mvn -B --no-transfer-progress -Dgpg.passphrase=${{ secrets.MAVEN_RELEASE_KEY_PASSPHRASE }} deploy
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_NEXUS_SECRET }}
